@@ -1,0 +1,31 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body{ 
+    background: url('fond.jpg');
+    background-size: cover; 
+    overflow:hidden;
+}
+
+p{
+    font-size: 120px;
+    font-family: 'Press Start 2P', cursive;
+    color: rgb(254, 232, 16);
+}
+.alien{
+   
+    
+}
+
+.vaisseau{
+    
+   
+}
+
+.footer{
+    font-size: 12px;
+    font-family:'Press Start 2P', cursive; 
+    color: rgb(254, 232, 16);
+}

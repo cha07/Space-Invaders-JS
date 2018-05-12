@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="jeu.js"></script>
+    <title>Space Invaders</title>
+    <style>
+        html, body {margin: 0px; padding:0px; width: 100%; height: 100%;}
+        body { background: url('fond.jpg'); background-size: cover; overflow:hidden}
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+
+    var etoile1 = new Sprite("etoile.png", 1500,0);
+    var etoile2 = new Sprite("etoile.png", 600,0);
+    var etoile3 = new Sprite("etoile.png", 100,300);
+    var etoile4 = new Sprite("etoile.png", 5,100);
+    
+
+    // aliens 
+    var alien1 = new Sprite("alien1.png",100,50);
+    var alien2 = new Sprite("alien1.png",400,50);
+    var alien3 = new Sprite("alien1.png",700,50);
+    var alien4 = new Sprite("alien1.png",1000,50);
+    var alien5 = new Sprite("alien1.png",1300,50);
+
+    var alien6 = new Sprite("alien1.png",250,200);
+    var alien7 = new Sprite("alien1.png",550,200);
+    var alien8 = new Sprite("alien1.png",850,200);
+    var alien9 = new Sprite("alien1.png",1150,200);
+    var alien10 = new Sprite("alien1.png",1450,200);
+
+    var alien11 = new Sprite("alien1.png",100,300);
+    var alien12 = new Sprite("alien1.png",400,300);
+    var alien13 = new Sprite("alien1.png",700,300);
+    var alien14 = new Sprite("alien1.png",1000,300);
+    var alien15 = new Sprite("alien1.png",1300,300);
+
+    
+    //missile
+    var missile = new Sprite("missile.png", 0,0);
+    missile.display = "none";
+   
+    
+
+    //vaisseau
+    var vaisseau = new Sprite( "vaisseau1.png", 740, 650);
+    /*var v=document.getElementById("vaisseau")
+    v.style.position="absolute";
+    v.style.left="1000px";
+    v.style.top="300px";*/
+    /*vaisseau.left = 100;*/ 
+    /*vaisseau.display = "block";*/
+
+    document.onkeydown = function(event) {
+       //console.log(event.keyCode) ;
+
+       //deplacement gauche
+       if(event.keyCode == 37){
+           vaisseau.left -=10;
+           //vaisseau.top -= 10;
+
+        //deplacement haut
+       } else if(event.keyCode == 38){
+           vaisseau.top -= 10;
+
+        //deplacement droite
+       } else if(event.keyCode == 39){
+           vaisseau.left += 10;
+           //vaisseau.top += 10;
+
+        //deplacement bas
+       } else if(event.keyCode == 40){
+           vaisseau.top += 10;
+       }
+
+        //empecher le vaisseau de sortir du cadre gauche-droite
+       if(vaisseau.left < 0){
+           vaisseau.left = 0;
+       }
+       if (vaisseau.left > document.body.clientWidth - vaisseau._node.width){
+           vaisseau.left = document.body.clientWidth - vaisseau._node.width;
+       }
+
+       //empecher vaisseau de sortir du cadre haut-bas
+       if(vaisseau.top < 0){
+           vaisseau.top = 0;
+       }
+       if (vaisseau.top > document.body.clientHeight - vaisseau._node.height){
+           vaisseau.top = document.body.clientHeight - vaisseau._node.height;
+       }
+
+        //tir du missile
+       if(event.keyCode == 32){
+           if (missile.display == "none"){
+           missile.display ="block";
+           missile.left = vaisseau.left + (vaisseau._node.width - missile._node.width) / 2;
+           missile.top = vaisseau.top;
+           missile.startAnimation (moveMissile, 20);
+       }}
+
+    };
+
+   
+    //tir du missile sur aliens
+    function moveMissile(missile){
+        missile.top -= 10;
+        if (missile.top < -40) {
+        missile.stopAnimation();
+        missile.display ="none";
+    }
+    //tir du missile et disparition alien 1à1
+    for (var i=1; i<=15; i++){
+        var alien = window["alien"+i];
+        if (alien.display == "none") continue;
+        if (missile.checkCollision(alien)){
+            missile.stopAnimation();
+            missile.display="none";
+            alien.stopAnimation();
+            alien.display="none";
+        }
+    }
+    }
+
+    //  function moveEtoileToBottom(etoile){
+    //     etoile.left -=3;
+    //     if (etoile.left <= 0){
+    //         etoile.top+= 50;
+    //         etoile.startAnimation(moveEtoileToBottom, 20);
+    //     }
+    // }
+
+    // function moveEtoileToBottom (etoile){
+    //     etoile.left +=3;
+
+    //     if (etoile.left > document.body.clientHeight - etoile._node.height){
+    //         etoile.top += 50;
+    //         etoile.startAnimation(moveEtoileToTop,20);
+    //     }
+    // }
+
+    // for (var j=1; j<=4; j++){
+    //     window["etoile"+j].startAnimation(moveEtoileToBottom, 20);
+    // }
+
+    // for (var j=1; j<=4; j++){
+    //     var etoile = window["etoile"+j];
+    //     if (etoile.display == "none") continue;
+    //     if (etoile.checkCollision(vaisseau)){
+    //         missile.stopAnimation();
+    //         missile.display="none";
+    //         alien.stopAnimation();
+    //         alien.display="none";
+    //     }}
+
+    // faire defiler aliens de haut en bas, gauche à droite-droite à gauche etc    
+    function moveAlienToLeft (alien){
+        alien.left -=3;
+
+        if (alien.left <= 0){
+            alien.top += 50;
+            alien.startAnimation(moveAlienToRight,20);
+        }
+    }
+
+    function moveAlienToRight (alien){
+        alien.left +=3;
+
+        if (alien.left > document.body.clientWidth - alien._node.width){
+            alien.top += 50;
+            alien.startAnimation(moveAlienToLeft,20);
+        }
+    }
+    
+    for (var i=1; i<=15; i++){
+        window["alien"+i].startAnimation(moveAlienToRight, 20);
+    }
+
+    //ou (autre methode pr faire apparaitre aliens)
+
+    // alien1.startAnimation(moveAlienToRight, 20);
+    // alien6.startAnimation(moveAlienToRight, 20);
+    // alien7.startAnimation(moveAlienToRight, 20);
+    // alien3.startAnimation(moveAlienToRight, 20);
+    // alien2.startAnimation(moveAlienToRight, 20);
+
+    // alien4.startAnimation(moveAlienToRight, 20); 
+    // alien8.startAnimation(moveAlienToRight, 20); 
+    // alien5.startAnimation(moveAlienToRight, 20); 
+    // alien10.startAnimation(moveAlienToRight, 20); 
+    // alien9.startAnimation(moveAlienToRight, 20); 
+
+    // alien11.startAnimation(moveAlienToRight, 20); 
+    // alien12.startAnimation(moveAlienToRight, 20); 
+    // alien13.startAnimation(moveAlienToRight, 20); 
+    // alien14.startAnimation(moveAlienToRight, 20); 
+    // alien15.startAnimation(moveAlienToRight, 20);
+    
+
+</script>
+</body>
+</html>

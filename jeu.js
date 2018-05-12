@@ -2,8 +2,11 @@ function Sprite(filename, left, top){
     this._node= document.createElement("img");
     this._node.src=filename;
     this._node.style.position="absolute";
-    this._node.style.height="100px";
-    this._node.style.width="100px";
+    // this._node.style.height="100px";
+    // this._node.style.width="100px";
+    
+
+    
 
     document.body.appendChild(this._node);
 
