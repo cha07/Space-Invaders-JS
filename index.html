@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <script type="text/javascript" src="jeu.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    
     <title>Space Invaders</title>
     <style>
         
@@ -16,20 +16,46 @@
 <header>
 </header>
 <body>
-        <div class="container">
-            <div class="row">
-                <div class="col xl12">    
-            <p>Sp<img class="alien" src="alien.png">ce</p>
+                                               
+            <p> Sp<img class="alien" src="alien.png">ce</p>                          
             <p><img class="vaisseau" src="vaisseau.png">nvaders</p>        
-                </div>
-            </div>
-        </div>
-    <a href="jeu.html">PLAY</href></a>
-        
+            <a class="jeu" href="jeu.html">PLAY</href></a>
+
+<script type="text/javascript">
+
+var alien = new Sprite("alien1.png",100,40);
+var vaisseau = new Sprite( "vaisseau1.png", 1400, 300);
+
+  function moveAlienToLeft (alien){
+        alien.left -=3;
+
+        if (alien.left <= 0){
+            alien.top += 50;
+            alien.startAnimation(moveAlienToRight,20);
+        }
+    }
+
+    function moveAlienToRight (alien){
+        alien.left +=3;
+
+        if (alien.left > document.body.clientWidth - alien._node.width){
+            alien.top += 50;
+            alien.startAnimation(moveAlienToLeft,20);
+        }
+    }
     
+    for (var i=1; i<=15; i++){
+        window["alien"+i].startAnimation(moveAlienToRight, 20);
     
+
+</script>               
 </body>
+
+
 <footer>
-    <p class="footer"><a href="https://www.facebook.com/charlotte.gilot.58">cTBY</href></a> 2018 Copyright©</p>
+        <div class="footer">
+        <p><a href="https://www.facebook.com/charlotte.gilot.58">cTBY</href></a>
+        _2018 Copyright ©</p>
+        </div>      
 </footer>
 </html>

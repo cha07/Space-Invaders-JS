@@ -13,19 +13,33 @@ p{
     font-size: 120px;
     font-family: 'Press Start 2P', cursive;
     color: rgb(254, 232, 16);
-}
-.alien{
-   
-    
-}
-
-.vaisseau{
-    
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
    
 }
+.jeu{
+    color: rgb(254, 232, 16);
+    font-family: 'Press Start 2P', cursive;
+    font-weight: 100px;
+    display: flex;
+    justify-content: center; 
+}
 
-.footer{
+.footer p {
     font-size: 12px;
     font-family:'Press Start 2P', cursive; 
     color: rgb(254, 232, 16);
+    
+}
+
+.footer a{
+    font-size: 12px;
+    font-family:'Press Start 2P', cursive; 
+    color: rgb(254, 232, 16); 
+}
+
+.footer{
+    display: flex;
+    justify-content: center;
 }
