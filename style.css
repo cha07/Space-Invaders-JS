@@ -5,8 +5,10 @@
 
 body{ 
     background: url('fond.jpg');
-    background-size: cover; 
-    overflow:hidden;
+    background-size: cover;
+    /* overflow:hidden; */
+    
+    
 }
 
 p{
@@ -42,4 +44,21 @@ p{
 .footer{
     display: flex;
     justify-content: center;
+}
+
+#alien2{
+    
+    /* position: relative;  */
+    padding-top: 24px;
+    
+}
+
+#vaisseau2{
+    position: relative;
+    
+}
+
+#attak{
+    display: flex;
+    justify-content: space-between;
 }
